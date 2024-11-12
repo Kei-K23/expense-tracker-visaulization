@@ -16,6 +16,12 @@ def add_expense():
     
     print("Expense added successfully")
 
+def view_expense():
+    with open('expense.csv', mode="r") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            print(row)
+
 def main():
     while True:
         print("\n--- Personal Expense Tracker Visualization ---")
@@ -30,6 +36,8 @@ def main():
         
         if choice == "1":
             add_expense()
+        elif choice == "2":
+            view_expense()
         else:
             print("Invalid option. Please try again.")
 
