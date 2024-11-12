@@ -1,3 +1,3 @@
 # Expense Tracker Visualization
 
-Simple Expense Tracker Visualization with matplotlib
+Simple Expense Tracker Visualization with Python and Matplotlib
