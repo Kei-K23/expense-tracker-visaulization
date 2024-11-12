@@ -21,6 +21,24 @@ def view_expense():
         reader = csv.DictReader(file)
         for row in reader:
             print(row)
+            
+def calculate_total_expense():
+    total = 0.00
+    with open('expense.csv', mode="r") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            total += float(row['amount'])
+    print(f"Total expense: ${total:.2f}")
+
+def expense_by_category():
+    categories = {"Food": 0, "Entertainment" : 0, "Transport": 0, "Bills" : 0, "Others": 0 }
+    with open('expense.csv', mode="r") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            categories[row['category']] += float(row['amount'])
+    
+    for category, amount in categories.items():
+        print(f"{category} : {amount:.2f}")
 
 def main():
     while True:
@@ -38,6 +56,8 @@ def main():
             add_expense()
         elif choice == "2":
             view_expense()
+        elif choice == "3":
+            calculate_total_expense()
         else:
             print("Invalid option. Please try again.")
 
