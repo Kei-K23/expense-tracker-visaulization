@@ -1,4 +1,5 @@
 import csv
+import matplotlib.pyplot as plt
 
 def add_expense():
     date = input("Enter the date (YYYY-MM-DD): ")
@@ -38,7 +39,22 @@ def expense_by_category():
             categories[row['category']] += float(row['amount'])
     
     for category, amount in categories.items():
-        print(f"{category} : {amount:.2f}")
+        print(f"{category} : ${amount:.2f}")
+
+def plot_expense_by_category():
+    categories = {"Food": 0, "Entertainment" : 0, "Transport": 0, "Bills" : 0, "Others": 0 }
+    with open('expense.csv', mode="r") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            categories[row['category']] += float(row['amount'])
+    
+    labels = list(categories.keys())
+    sizes = list(categories.values())
+    
+    plt.figure(figsize=(8, 8))
+    plt.pie(sizes, labels=labels, autopct="%1.1f%%", startangle=140)
+    plt.title("Expense by Category")
+    plt.show()
 
 def main():
     while True:
@@ -58,6 +74,12 @@ def main():
             view_expense()
         elif choice == "3":
             calculate_total_expense()
+        elif choice == "4":
+            expense_by_category()
+        elif choice == "5":
+            plot_expense_by_category()
+        elif choice == "6":
+            break
         else:
             print("Invalid option. Please try again.")
 
